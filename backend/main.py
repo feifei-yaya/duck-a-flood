@@ -14,7 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")  # stored in .env or terminal environment
+NEWS_API_KEY = os.getenv("6cf87caeaa834e3c935c7e82c35fc3b1")  # stored in .env or terminal environment
 
 @app.get("/health") 
 async def main(): 

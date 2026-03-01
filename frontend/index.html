@@ -38,15 +38,18 @@
  </div>
     <script>
 async function fetchFloodNews(){
-    const res = await fetch("http://127.0.0.1:8000/news?q=texas%20flood&pageSize=10"); // fixes no connection error 
-    const data = await res.json();
+    const res = await fetch("http://127.0.0.1:8000/news?q=georgia%20flood&pageSize=10"); // fixes no connection error 
+    const data = await res.json(); // gets json with artcles 
+    console.log("Raw API response:", data);
     const articles = data.articles || [];
+    console.log("Articles count:", articles.length); 
 
     const container = document.getElementById('news-container');
     container.innerHTML = ''; // clear previous
 
     if(!articles || articles.length === 0){
-        container.innerHTML = "<p>No news available at the moment.</p>";
+        container.innerHTML = '<p>No news available at the moment. </p>';
+        container.innerHTML = `<p>Found ${articles.length} article(s)</p>`;
         return;
     }
 
@@ -55,7 +58,7 @@ async function fetchFloodNews(){
         div.innerHTML = `
             <h3>${i+1}. <a href="${article.url}" target="_blank">${article.title}</a></h3>
             <p>${article.description || ''}</p>
-            <small>Source: ${article.source.name} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
+            <small>Source: ${article.source?.name || 'Unknown'} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
             <hr>
         `;
         container.appendChild(div);
