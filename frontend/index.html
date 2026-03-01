@@ -4,88 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pages.css">
     <link rel="stylesheet" href="map.css">
-
     <title>Duck, A Flood!</title>
 </head>
 <body>
     <nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">Duck, A Flood!</div>
-    <ul class="nav-links">
-      <li><a href="map.html">Map</a></li>
-      <li><a href="safety.html">Emergency Contacts</a></li>
-      <li><a href="index.html" class="active">Home</a></li>
-    </ul>
-  </div>
-</nav>
-        
+        <div class="nav-container">
+            <div class="logo">Duck, A Flood!</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class = "active">Home</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="safety.html" class="active">Emergency Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="content">
         <h1>Welcome to Duck, A Flood!</h1>
         <p>Your one-stop resource for flood information and safety tips.</p>
         <p>Use the navigation above to explore the flood map and emergency contacts.</p>
     </div>
 
-<h1 style="text-align:center; margin-top:60px;">Latest Flood News</h1>
+    <h1 style="text-align:center; margin-top:60px;">Latest Flood News</h1>
 
-<div id="news-feed">
-  <div class="news-track" id="news-track">
-    <!-- Articles will be injected here -->
-  </div>
-</div>
+    <div id="news-feed">
+        <div class="news-track" id="news-track">
+            <!-- Articles will be injected here -->
+        </div>
+    </div>
+
     <script>
-async function fetchFloodNews(){
-    const res = await fetch("http://127.0.0.1:8000/news?q=flood+disaster+&pageSize=30"); // increased pageSize to account for filtered articles
-    const data = await res.json();
-    console.log("Raw API response:", data);
+        async function fetchFloodNews() {
+            const res = await fetch("http://127.0.0.1:8000/news?q=flood+disaster&pageSize=30");
+            const data = await res.json();
+            console.log("Raw API response:", data);
 
-    // Filter to only georgia/atlanta articles
-    let articles = (data.articles || []).filter(article => {
-        const text = `${article.title} ${article.description}`.toLowerCase();
-        return text.includes("flood") || text.includes("flash") || text.includes("inundat") || text.includes("river");
-    });
+            let articles = (data.articles || []).filter(article => {
+                const text = `${article.title} ${article.description}`.toLowerCase();
+                return text.includes("flood") || text.includes("flash") || text.includes("inundat") || text.includes("river");
+            });
 
-    // Deduplicate by title
-    const seen = new Set();
-    articles = articles.filter(article => {
-        const key = article.title?.toLowerCase().trim();
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-    });
+            const seen = new Set();
+            articles = articles.filter(article => {
+                const key = article.title?.toLowerCase().trim();
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
 
-    console.log("Articles count after filter:", articles.length);
+            console.log("Articles count after filter:", articles.length);
 
-    const container = document.getElementById('news-container');
-    container.innerHTML = '';
+            const container = document.getElementById('news-track'); // ← fixed to match your HTML
+            container.innerHTML = '';
 
-    if(!articles || articles.length === 0){
-        container.innerHTML = '<p>No news available at the moment.</p>';
-        return;
-    }
+            if (!articles || articles.length === 0) {
+                container.innerHTML = '<p>No news available at the moment.</p>';
+                return;
+            }
 
-    container.innerHTML = `<p>Found ${articles.length} article(s)</p>`;
+            container.innerHTML = `<p>Found ${articles.length} article(s)</p>`;
 
-    articles.forEach((article, i) => {
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <h3>${i+1}. <a href="${article.url}" target="_blank">${article.title || 'No title'}</a></h3>
-            <p>${article.description || ''}</p>
-            <small>Source: ${article.source?.name || 'Unknown'} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
-            <hr>
-        `;
-        container.appendChild(div);
-    });
-}
+            articles.forEach((article, i) => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <h3>${i + 1}. <a href="${article.url}" target="_blank">${article.title || 'No title'}</a></h3>
+                    <p>${article.description || ''}</p>
+                    <small>Source: ${article.source?.name || 'Unknown'} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
+                    <hr>
+                `;
+                container.appendChild(div);
+            });
+        }
 
-fetchFloodNews();
-setInterval(fetchFloodNews, 5*60*1000);
-</script>
-
-
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchFloodNews();
+            setInterval(fetchFloodNews, 5 * 60 * 1000);
+        });
+    </script>
 </body>
-
 </html>
