@@ -1,6 +1,12 @@
-body{
-    height:100%;
-    margin:0;
+:root {
+  --color-accent: #38bdf8;
+  --font-data: 'IBM Plex Mono', monospace;
+  --muted: #64748b;
+}
+
+body {
+    height: 100%;
+    margin: 0;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     color: #111827;
@@ -15,7 +21,7 @@ body{
 
 .nav-container {
   width: 90%;
-  max-width: 1200px;
+  max-width: 2000px;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -24,7 +30,7 @@ body{
 
 .logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
+  font-size: 28px;
   letter-spacing: 2px;
   color: white;
 }
@@ -55,8 +61,8 @@ body{
 
 /* Intro section */
 .content {
-  padding: 120px 20px 300px 20px; /* bottom padding for news feed */
-  max-width: 900px;
+  padding: 60px 20px 300px 20px;
+  max-width: 1000px;
   margin: auto;
   text-align: center;
 }
@@ -68,41 +74,25 @@ body{
 }
 
 .content p {
-  font-family: 'Karla', sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 1.2em;
   margin-bottom: 15px;
-  color: #333;
+  color: white;
 }
 
-.news-article {
-  min-width: 600px;
-  height: 170px;
-  background: #1e293b;
-  padding: 18px;
-  border-radius: 14px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid #334155;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
-}
+/* News feed ticker */
 #news-feed {
   position: fixed;
   bottom: 40px;
   left: 0;
   width: 100%;
-  height: 300px;
+  height: 220px;
   overflow: hidden;
   background: #0f172a;
   border-top: 3px solid #2980b9;
   display: flex;
   align-items: center;
   z-index: 999;
-}
-.news-article:hover {
-  transform: translateY(-5px);
 }
 
 .news-track {
@@ -112,20 +102,34 @@ body{
 }
 
 .news-article {
-  min-width: 260px;
-  height: 140px;
+  min-width: 400px;
+  height: 160px;
   background: #1b1f2a;
-  padding: 15px;
+  padding: 18px;
   border-radius: 10px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid #334155;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.news-article:hover {
+  transform: translateY(-5px);
 }
 
 .news-article h3 {
-  font-size: 14px;
+  font-size: 15px;
   font-family: var(--font-data);
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .news-article a {
@@ -133,9 +137,27 @@ body{
   text-decoration: none;
 }
 
+.news-article a:hover {
+  text-decoration: underline;
+}
+
+.news-article p {
+  font-size: 12px;
+  color: #94a3b8;
+  font-family: var(--font-data);
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.5;
+}
+
 .news-article small {
   font-size: 11px;
   color: var(--muted);
+  font-family: var(--font-data);
+  white-space: nowrap;
 }
 
 @keyframes scrollNews {

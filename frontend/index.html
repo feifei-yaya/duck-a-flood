@@ -9,32 +9,109 @@
     <link rel="stylesheet" href="pages.css">
     <link rel="stylesheet" href="map.css">
     <title>Duck, A Flood!</title>
+
+    <style>
+        #news-feed {
+            width: 100%;
+            height:350px;
+            overflow-x: auto;
+            padding: 20px 40px 40px 40px;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: #00f5d4 #111827;
+        }
+
+        #news-feed::-webkit-scrollbar {
+            height: 6px;
+        }
+        #news-feed::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        #news-feed::-webkit-scrollbar-thumb {
+            background: #00f5d4;
+            border-radius: 3px;
+        }
+
+        .news-row {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .news-card {
+            background: #111827;
+            border: 1px solid #1e3a5f;
+            border-radius: 10px;
+            padding: 20px;
+            width: 320px;
+            height:290px;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            border-color: #00f5d4;
+        }
+
+        .news-card h3 {
+            font-size: 1rem;
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+        }
+
+        .news-card h3 a {
+            color: #00f5d4;
+            text-decoration: none;
+        }
+
+        .news-card h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .news-card p {
+            font-size: 0.85rem;
+            color: #aaaaaa;
+            line-height: 1.5;
+            margin: 0 0 12px 0;
+        }
+
+        .news-card small {
+            font-size: 0.75rem;
+            color: #555555;
+        }
+
+        .news-count {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            margin: 0 0 15px 40px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">Duck, A Flood!</div>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="map.html">Map</a></li>
-      <li><a href="safety.html">Emergency Contacts</a></li>
-    </ul>
-  </div>
-</nav>
-        
+        <div class="nav-container">
+            <div class="logo">Duck, A Flood!</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="safety.html">Emergency Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="content">
         <h1>Welcome to Duck, A Flood!</h1>
         <p>Your one-stop resource for flood information and safety tips.</p>
-        <p>Use the navigation above to explore the flood map and emergency contacts.</p>
+        <p>Use the navigation above to explore the flood risk prediction map and emergency contacts.</p>
+        <p>Flood risks are predicted using logistic regression model run on National Weather Service (NWS) alert levels (0-1.0 severity encoded numerically) and USGS regional gauge (height) ratios.</p>
     </div>
 
-<h1 style="text-align:center; margin-top:60px;">Latest Flood News</h1>
+    <h1 style="text-align:center; margin-top:60px;">Latest Flood News</h1>
 
-<div id="news-feed">
-  <div class="news-track" id="news-track">
-    <!-- Articles will be injected here -->
-  </div>
-</div>
+    <div id="news-feed"></div>
+
     <script>
         async function fetchFloodNews() {
             const res = await fetch("http://127.0.0.1:8000/news?q=flood+disaster&pageSize=30");
@@ -43,7 +120,9 @@
 
             let articles = (data.articles || []).filter(article => {
                 const text = `${article.title} ${article.description}`.toLowerCase();
-                return text.includes("flood") || text.includes("flash") || text.includes("inundat") || text.includes("river");
+                const isFlood = text.includes("flood") || text.includes("flash") ||
+                                text.includes("inundat") || text.includes("river");
+                return isFlood;
             });
 
             const seen = new Set();
@@ -56,26 +135,34 @@
 
             console.log("Articles count after filter:", articles.length);
 
-            const container = document.getElementById('news-track'); // ← fixed to match your HTML
+            const container = document.getElementById('news-feed');
             container.innerHTML = '';
 
             if (!articles || articles.length === 0) {
-                container.innerHTML = '<p>No news available at the moment.</p>';
+                container.innerHTML = '<p class="news-count">No news available at the moment.</p>';
                 return;
             }
 
-            container.innerHTML = `<p>Found ${articles.length} article(s)</p>`;
+            const count = document.createElement('p');
+            count.className = 'news-count';
+            count.textContent = `LIVE Updates: Found ${articles.length} article(s)`;
+            container.appendChild(count);
+
+            const row = document.createElement('div');
+            row.className = 'news-row';
 
             articles.forEach((article, i) => {
                 const div = document.createElement('div');
+                div.className = 'news-card';
                 div.innerHTML = `
                     <h3>${i + 1}. <a href="${article.url}" target="_blank">${article.title || 'No title'}</a></h3>
                     <p>${article.description || ''}</p>
                     <small>Source: ${article.source?.name || 'Unknown'} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
-                    <hr>
                 `;
-                container.appendChild(div);
+                row.appendChild(div);
             });
+
+            container.appendChild(row);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
