@@ -1,58 +1,70 @@
-const axios = require('axios');
+const axios = require("axios");
+const express = require("express");
 
-// Function to fetch flood news
-async function fetchFloodNews() {
-    const articles = response.data.articles; 
-    try {
-        // Using NewsAPI (free tier available at newsapi.org)
-        const apiKey = process.env.NEWS_API_KEY; // Get free key from newsapi.org
-        const url = `https://newsapi.org/v2/everything?q=flood&sortBy=publishedAt&language=en&apiKey=${apiKey}`;
-
-        const response = await axios.get(url);
-        
-        
-        console.log('Recent Flood News:');
-        articles.forEach((article, index) => {
-            console.log(`\n${index + 1}. ${article.title}`);
-            console.log(`Source: ${article.source.name}`);
-            console.log(`Time: ${article.publishedAt}`);
-            console.log(`URL: ${article.url}`);
-        });
-
-        return articles;
-    } catch (error) {
-        console.error('Failed to fetch flood news, retrying in 5 mins:', error.message);
-        setTimeout(fetchFloodNews, 300000); // Retry in 5 minutes (300000 ms)
-    }
-}
-
-// Schedule to run every hour (3600000 ms)
-setInterval(fetchFloodNews, 360000);
-setInterval(updateNews, 360000);
-// Run immediately on start
-fetchFloodNews();
-
-module.exports = { fetchFloodNews };
-
+const app = express();
 let latestNews = [];
 
-async function updateNews() {
-    latestNews = await fetchFloodNews();
-    latestNews = latestNews.slice(0,10);
-    
+// Get date N days ago in YYYY-MM-DD (NewsAPI accepts this)
+function getDateNDaysAgo(days) {
+  const d = new Date();
+  d.setDate(d.getDate() - days);
+  return d.toISOString().split("T")[0];
 }
-const express = require('express');
-const app = express();
-app.get('/news', (req, res) => {
-    if (latestNews.length === 0) {
-        return res.status(503).json({ error: 'News not available yet, please try again later.' });
-    }
-    res.json(latestNews);
-});
-app.listen(3000, () => {
-    console.log('News server running on port 3000');
+
+// Fetch latest flood news from the past week
+async function fetchFloodNewsPastWeek(limit = 5) {
+  try {
+    const apiKey = process.env.NEWS_API_KEY;
+    if (!apiKey) throw new Error("NEWS_API_KEY is not set");
+
+    const fromDate = getDateNDaysAgo(7);
+
+    const url =
+      `https://newsapi.org/v2/everything` +
+      `?q=flood` +
+      `&from=${fromDate}` +
+      `&sortBy=publishedAt` +
+      `&language=en` +
+      `&pageSize=${limit}` +
+      `&apiKey=${apiKey}`;
+
+    const response = await axios.get(url);
+    const articles = response.data?.articles ?? [];
+
+    console.log(`Fetched ${articles.length} articles (past week).`);
+    return articles.slice(0, limit);
+  } catch (error) {
+    console.error("Failed to fetch flood news:", error.message);
+    return [];
+  }
+}
+
+// Update in-memory cache
+async function updateNews() {
+  const articles = await fetchFloodNewsPastWeek(5);
+  latestNews = articles;
+  console.log("Updated latestNews count:", latestNews.length);
+}
+
+// Serve cached news
+app.get("/news", (req, res) => {
+  if (latestNews.length === 0) {
+    return res
+      .status(503)
+      .json({ error: "News not available yet, try again shortly." });
+  }
+  res.json({
+    updatedAt: new Date().toISOString(),
+    count: latestNews.length,
+    articles: latestNews,
+  });
 });
 
-  console.log('Serving news, count:', latestNews.length); // add this
-  res.json(latestNews);
+// Start server
+app.listen(3000, () => {
+  console.log("News server running on port 3000");
 });
+
+// Run immediately, then every 10 minutes
+updateNews();
+setInterval(updateNews, 10 * 60 * 1000); // 10 minutes
