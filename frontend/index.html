@@ -38,7 +38,7 @@
  </div>
     <script>
 async function fetchFloodNews(){
-    const res = await fetch("http://127.0.0.1:8000/news?q=georgia%20flood&pageSize=10"); // fixes no connection error 
+    const res = await fetch("http://127.0.0.1:8000/news?q=flood+disaster+&pageSize=10"); // fixes no connection error 
     const data = await res.json(); // gets json with artcles 
     console.log("Raw API response:", data);
     const articles = data.articles || [];
