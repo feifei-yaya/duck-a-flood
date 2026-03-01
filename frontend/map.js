@@ -15,13 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
     {name:"Atlanta", lat:33.7490, lng:-84.3880, risk:0.33}
   ];
 
-<<<<<<< HEAD
   // Sort by risk descending
   cityData.sort((a,b) => b.risk - a.risk);
-=======
   // List of Georgia cities
   const cities = ['Atlanta', 'Savannah', 'Augusta', 'Columbus', 'St. Simons', 'Macon', 'Albany', 'Athens', 'Roswell'];
->>>>>>> 79b4b98c5f46400ce5d8630cbc0aef2a4ee8f619
 
   // Functions for category & color
   function getRiskCategory(risk){

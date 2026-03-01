@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="pages.css">
-    <link rel="stylesheet" href="map.css">
-
-    <title>Duck, A Flood!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
+<title>Duck, A Flood!</title>
 </head>
 <body>
-    <nav class="navbar">
+
+<!-- Navbar -->
+<nav class="navbar">
   <div class="nav-container">
     <div class="logo">Duck, A Flood!</div>
     <ul class="nav-links">
@@ -22,42 +22,19 @@
     </ul>
   </div>
 </nav>
-        
-    <div class="content">
-        <h1>Welcome to Duck, A Flood!</h1>
-        <p>Your one-stop resource for flood information and safety tips.</p>
-        <p>Use the navigation above to explore the flood map and emergency contacts.</p>
-    </div>
 
-<div> 
-    <h1>Latest Flood News</h1>
-    <script>
-async function fetchFloodNews(){
-    const res = await fetch('/news'); // match backend route
-    const articles = await res.json();
-
-    const container = document.getElementById('news-container');
-    container.innerHTML = ''; // clear previous
-
-    articles.forEach((article, i) => {
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <h3>${i+1}. <a href="${article.url}" target="_blank">${article.title}</a></h3>
-            <p>${article.description || ''}</p>
-            <small>Source: ${article.source.name} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
-            <hr>
-        `;
-        container.appendChild(div);
-    });
-}
-
-// run immediately
-fetchFloodNews();
-// refresh every 5 minutes
-setInterval(fetchFloodNews, 5*60*1000);
-</script>
+<!-- Intro -->
+<div class="content">
+  <h1>Duck, A Flood!</h1>
+  <p>Your one-stop resource for flood information and safety tips.</p>
+  <p>Explore live flood news and updates from trusted sources around the world.</p>
 </div>
 
-</body>
+<!-- News feed -->
+<div id="news-feed">
+  <div class="news-track"></div>
+</div>
 
+<script src="news.js"></script>
+</body>
 </html>
