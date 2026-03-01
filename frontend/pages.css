@@ -45,5 +45,48 @@ body{
   font-style: normal;
   font-size: 1.2em; 
 }
+.navbar {
+  width: 100%;
+  background-color: #101935;
+  padding: 16px 0;
+}
 
+.nav-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-links li a:hover {
+  opacity: 0.7;
+}
+
+.nav-links li a.active {
+  border-bottom: 2px solid #2980b9;
+}
