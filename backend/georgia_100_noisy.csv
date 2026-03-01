@@ -1,0 +1,101 @@
+city,alert_level,gauge_ratio,risk_label
+Columbus,0.33,0.0,0
+Atlanta,0.0,0.064,0
+Augusta,0.33,0.451,0
+Savannah,1.0,0.268,1
+Athens,1.0,1.0,1
+Macon,1.0,0.309,1
+Albany,0.67,0.32,1
+Albany,0.0,0.471,0
+Savannah,1.0,0.133,1
+Albany,0.33,0.858,1
+Albany,0.33,0.412,1
+Albany,0.67,0.341,1
+Macon,0.0,0.601,0
+Atlanta,0.67,0.447,1
+Atlanta,0.0,0.324,0
+Roswell,0.67,0.972,1
+Savannah,0.0,0.305,0
+Augusta,0.0,0.579,0
+Columbus,0.67,0.719,1
+St. Simons,1.0,0.804,1
+Atlanta,0.0,0.417,0
+Atlanta,0.0,0.106,0
+Savannah,1.0,0.589,1
+Augusta,1.0,0.618,1
+Roswell,0.0,0.336,0
+Roswell,1.0,0.867,1
+Atlanta,0.67,0.212,1
+Athens,0.33,0.447,0
+Albany,0.67,0.253,1
+Macon,0.0,0.451,0
+Savannah,0.67,0.325,1
+Atlanta,1.0,0.768,1
+Augusta,0.33,0.39,0
+Albany,0.67,0.241,1
+Columbus,0.33,0.705,0
+Augusta,1.0,0.263,1
+Atlanta,0.0,0.576,0
+Albany,0.0,0.0,0
+Savannah,1.0,0.271,1
+Atlanta,0.67,0.512,1
+Augusta,0.67,0.862,1
+Atlanta,0.67,0.348,1
+Savannah,0.67,0.9,1
+Augusta,0.0,0.129,0
+Macon,0.67,0.936,1
+Albany,1.0,0.368,1
+Augusta,0.33,0.152,0
+Columbus,1.0,0.16,1
+St. Simons,0.33,0.108,0
+Athens,0.33,0.614,1
+Columbus,0.67,0.521,1
+St. Simons,1.0,0.67,1
+Atlanta,0.67,0.772,1
+Atlanta,1.0,0.132,1
+Roswell,1.0,0.374,1
+Atlanta,0.0,0.095,0
+St. Simons,1.0,0.88,1
+Macon,0.0,0.25,0
+Atlanta,1.0,0.887,1
+Augusta,0.0,0.0,0
+Macon,0.33,0.32,0
+Columbus,0.33,0.178,0
+Columbus,0.0,0.5,0
+Roswell,1.0,0.604,1
+Athens,0.0,0.302,0
+Albany,0.0,0.442,0
+Albany,1.0,0.495,1
+Roswell,0.0,0.555,0
+St. Simons,0.0,0.639,0
+Roswell,0.33,0.183,0
+Roswell,0.0,0.519,0
+Augusta,0.33,0.738,1
+Savannah,0.67,0.261,0
+Albany,0.67,0.152,1
+Macon,0.33,0.164,0
+Macon,0.33,0.279,0
+Columbus,0.33,0.279,0
+Macon,0.67,0.568,1
+St. Simons,0.67,0.803,0
+Atlanta,0.33,0.062,0
+Atlanta,0.33,0.031,0
+Macon,0.33,0.313,0
+Macon,1.0,0.31,1
+Roswell,0.67,0.311,1
+Augusta,1.0,0.312,1
+Macon,0.33,0.259,0
+St. Simons,1.0,0.835,1
+Macon,0.67,0.637,1
+Augusta,1.0,0.097,1
+Columbus,0.0,0.667,0
+Savannah,0.33,0.137,0
+Athens,0.33,0.232,0
+Columbus,0.0,0.561,0
+St. Simons,0.0,0.122,0
+Athens,1.0,0.42,1
+Columbus,0.33,0.203,0
+Albany,0.0,0.495,0
+St. Simons,0.33,0.294,1
+St. Simons,0.0,0.157,0
+Augusta,0.33,0.454,0
