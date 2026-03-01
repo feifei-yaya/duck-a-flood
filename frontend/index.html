@@ -29,13 +29,13 @@
         <p>Use the navigation above to explore the flood map and emergency contacts.</p>
     </div>
 
-<div> 
-    <h1>Latest Flood News</h1>
+<h1 style="text-align:center; margin-top:60px;">Latest Flood News</h1>
 
+<div id="news-feed">
+  <div class="news-track" id="news-track">
+    <!-- Articles will be injected here -->
+  </div>
 </div>
-<div id="news-container">
-        <p>Loading news...</p>
- </div>
     <script>
 async function fetchFloodNews(){
     const res = await fetch("http://127.0.0.1:8000/news?q=flood+disaster+&pageSize=30"); // increased pageSize to account for filtered articles

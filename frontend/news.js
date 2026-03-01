@@ -10,3 +10,25 @@ export async function getFloodNews(city = "georgia") {
   const data = await res.json();
   return data.articles ?? [];
 }
+const track = document.getElementById('news-track');
+track.innerHTML = '';
+
+if (!articles.length) {
+  track.innerHTML = '<div class="news-article">No news available.</div>';
+  return;
+}
+
+articles.forEach(article => {
+  const div = document.createElement('div');
+  div.className = "news-article";
+  div.innerHTML = `
+    <h3><a href="${article.url}" target="_blank">
+      ${article.title || 'No title'}
+    </a></h3>
+    <small>${article.source?.name || 'Unknown'}</small>
+  `;
+  track.appendChild(div);
+});
+
+/* Duplicate content for seamless loop */
+track.innerHTML += track.innerHTML;
