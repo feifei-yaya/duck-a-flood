@@ -31,18 +31,31 @@
 
 <div> 
     <h1>Latest Flood News</h1>
-    <div id="news-container">
-        
-      <p class="textfont">Below our latest articles on updates of floods and emergency situations.</p>
+    <script>
+async function fetchFloodNews(){
+    const res = await fetch('/news'); // match backend route
+    const articles = await res.json();
 
-    <script> 
-        async function loadNews(){
-            const res = await fetch('/api/news');
-            const articles = await res.json();
-            console.log(articles);
-        }
-        loadNews();
-    </script>
+    const container = document.getElementById('news-container');
+    container.innerHTML = ''; // clear previous
+
+    articles.forEach((article, i) => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <h3>${i+1}. <a href="${article.url}" target="_blank">${article.title}</a></h3>
+            <p>${article.description || ''}</p>
+            <small>Source: ${article.source.name} | Published: ${new Date(article.publishedAt).toLocaleString()}</small>
+            <hr>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// run immediately
+fetchFloodNews();
+// refresh every 5 minutes
+setInterval(fetchFloodNews, 5*60*1000);
+</script>
 </div>
 
 </body>

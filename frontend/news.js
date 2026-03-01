@@ -31,7 +31,7 @@ async function fetchFloodNews() {
 }
 
 // Schedule to run every hour (3600000 ms)
-setInterval(fetchFloodNews, 3600000);
+setInterval(fetchFloodNews, 60);
 setInterval(updateNews, 3600000);
 // Run immediately on start
 fetchFloodNews();
