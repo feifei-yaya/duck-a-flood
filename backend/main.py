@@ -2,23 +2,26 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import requests
+from model import score_city 
 
 app = FastAPI()
 
 # Allow your frontend to call this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://127.0.0.1:5500",
-        "http://localhost:5500",
-        "http://127.0.0.1:5173",  # if you later use Vite
-        "http://localhost:5173"
-    ],
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")  # stored in .env or terminal environment
+
+@app.get("/health") 
+async def main(): 
+    return {"status": "ok"} 
+@app.get('/score') # gets request from frontend def 
+def score(city: str): 
+    return {"risk_score": score_city(city), "city": city}
 
 @app.get("/news")
 def get_news(q: str = "texas flood", pageSize: int = 10):
