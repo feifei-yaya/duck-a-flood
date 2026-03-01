@@ -24,7 +24,7 @@ def score(city: str):
     return {"risk_score": score_city(city), "city": city}
 
 @app.get("/news")
-def get_news(q: str = "texas flood", pageSize: int = 10):
+def get_news(q: str = "georgia flood", pageSize: int = 10):
     if not NEWS_API_KEY:
         return {"error": "NEWS_API_KEY is not set"}
 
