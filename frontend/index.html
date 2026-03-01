@@ -38,8 +38,9 @@
  </div>
     <script>
 async function fetchFloodNews(){
-    const res = await fetch('/news');
-    const articles = await res.json();
+    const res = await fetch("http://127.0.0.1:8000/news?q=texas%20flood&pageSize=10"); // fixes no connection error 
+    const data = await res.json();
+    const articles = data.articles || [];
 
     const container = document.getElementById('news-container');
     container.innerHTML = ''; // clear previous
