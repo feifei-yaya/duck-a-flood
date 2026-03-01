@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     { name: "Macon",      lat: 32.8407, lng: -83.6324 },
     { name: "Albany",     lat: 31.5785, lng: -84.1557 },
     { name: "Athens",     lat: 33.9519, lng: -83.3576 },
-    { name: "Roswell",    lat: 34.0232, lng: -84.3616 },
+    { name: "Roswell",    lat: 34.0232, lng: -84.3616 }
   ];
 
   function getRiskCategory(risk) {
