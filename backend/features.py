@@ -13,6 +13,7 @@ CITY_COUNTIES = {
 import requests
 
 def get_nws_alert_level(city_name):
+    # returns nummerical severeness (0-1.0 scale) of severity of alert 
     county = CITY_COUNTIES.get(city_name, '')
     
     try:
@@ -54,7 +55,7 @@ def get_gauge_ratio(city_name):
     GAUGE_STATIONS = {
     'Atlanta': '02336000',     # Chattahoochee River at Atlanta, GA [web:25]
     'Savannah': '021989773',   # Savannah River at USACE Dock, at Savannah, GA [web:21]
-    'Augusta': 'c',     # Savannah River at Augusta, GA [web:26]
+    'Augusta': '02197000',     # Savannah River at Augusta, GA [web:26]
     'Columbus': '02341460',    # Chattahoochee River at 14th St, at Columbus, GA [web:23]
     'St. Simons': '03085700',  # Brunswick River at St. Simons, GA (nearby coastal gauge)
     'Macon': '02213000',       # Ocmulgee River at Macon, GA [web:29]
