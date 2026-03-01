@@ -16,6 +16,6 @@ async def main():
     return {"status": "ok"}
 
 
-@app.get('/score')
+@app.get('/score') # gets request from frontend 
 def score(city: str):
     return {"risk_score": score_city(city), "city": city}
