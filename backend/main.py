@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from model import score_city
 
 app = FastAPI()
 
@@ -17,4 +18,4 @@ async def main():
 
 @app.get('/score')
 def score(city: str):
-    return {"risk_score": 0.78, "severity": "High", "confidence": 0.73, "city": city}
+    return {"risk_score": score_city(city), "city": city}
