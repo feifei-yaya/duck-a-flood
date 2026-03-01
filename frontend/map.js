@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
     cityRistData.forEach(city=>{
 
-        const category = getRiskCategrory(city.risk);
+        const category = getRiskCategory(city.risk);
         const color = getRiskColor(city.risk);
         const cityDiv = document.createElement("div");
         cityDiv.className = `city-item ${category}`;
