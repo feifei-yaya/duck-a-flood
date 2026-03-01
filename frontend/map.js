@@ -15,5 +15,34 @@ document.addEventListener("DOMContentLoaded", function (){
         if(risk>0.7) return "high";
         if(risk>0.4) return "medium";
         return "low";}
-    
+    function getRiskColor(risk){
+        if(risk>0.7) return "#eb7575";
+        if(risk>0.4) return "#ffa200";
+        return "#29cd96";
+    }
+    const cityListDiv = document.getElementById("cityList");
+
+    cityRistData.forEach(city=>{
+
+        const category = getRiskCategrory(city.risk);
+        const color = getRiskColor(city.risk);
+        const cityDiv = document.createElement("div");
+        cityDiv.className = `city-item ${category}`;
+        cityDiv.innerHTML = `
+        <strong>${city.name}</strong><br/>
+        Risk Score: ${city.risk.toFixed(2)}
+        `;
+        cityListDiv.appendChild(cityDiv);
+        L.circleMarker([city.lat, city.lng],{
+            radius:10,
+            fillColor:color,
+            color:"#ffffff",
+            weight:1,
+            opacity:1,
+            fillOpacity:0.8,
+        }).addTo(map).bindPopup(`
+        <strong>${city.name}</strong><br/>
+        Risk Score: ${city.risk.toFixed(2)}
+        `);
+        })
 })
