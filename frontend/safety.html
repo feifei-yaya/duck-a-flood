@@ -1,29 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="pages.css">
-    <link rel="stylesheet" href="map.css">  
-    <title>SAFETY</title>
-</head>
-<body>
-   <nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">Duck, A Flood!</div>
-    <ul class="nav-links">
-      <li><a href="map.html">Map</a></li>
-      <li><a href="safety.html" class="active">Emergency Contacts</a></li>
-      <li><a href="index.html">Home</a></li>
-    </ul>
+<html>
 
-  </div>
-</nav>
-</div>
-    <div>
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="safety.css" >
+</head>
+
+
+<body>
+
+
+ <div class="container">
+<!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">Duck, A Flood!</div>
+      <ul class="nav-links">
+        <li><a href="map.html" >Map</a></li>
+        <li><a href="safety.html"class="active">Emergency Contact</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
     </div>
+  </nav>
+
+   <!-- LEFT SIDE: Risk Action Panels -->
+   <div class="news-grid">
+
+
+     <div class="news-card risk-high">
+       <h3>High Risk – Immediate Action Required</h3>
+       <ul>
+         <li>Move to higher ground immediately.</li>
+         <li>Avoid all floodwaters — do not drive through water.</li>
+         <li>Follow evacuation orders from authorities.</li>
+         <li>Keep emergency kit and phone with you.</li>
+       </ul>
+     </div>
+
+
+     <div class="news-card risk-moderate">
+       <h3>Moderate Risk – Stay Alert</h3>
+       <ul>
+         <li>Monitor local weather updates frequently.</li>
+         <li>Prepare an emergency bag.</li>
+         <li>Charge devices and review evacuation routes.</li>
+         <li>Move valuables to higher areas.</li>
+       </ul>
+     </div>
+
+
+     <div class="news-card risk-low">
+       <h3>Low Risk – Be Prepared</h3>
+       <ul>
+         <li>Stay aware of changing weather conditions.</li>
+         <li>Review emergency plans with household members.</li>
+         <li>Check drainage systems around your property.</li>
+         <li>Sign up for weather alerts.</li>
+       </ul>
+     </div>
+
+
+   </div>
+
+
+   <!-- RIGHT SIDE: Emergency Contacts -->
+   <div class="emergency-alert">
+     <h3>Emergency Contacts</h3>
+     <p>
+       If you are experiencing a life-threatening emergency,
+       call <a href="tel:911">9-1-1</a> immediately.
+     </p>
+     <p>
+       For non-emergency assistance in Georgia,
+       call <a href="tel:18004367442">1-800-GEORGIA</a>.
+     </p>
+   </div>
+
+
+ </div>
+
+
 </body>
+
+
 </html>
