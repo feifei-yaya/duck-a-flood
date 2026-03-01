@@ -26,3 +26,162 @@ body {
    color: var(--text);
    font-family: var(--font-heading);
  }
+.risk-panel {
+   position: fixed;
+   top: 0;
+   right: 0;
+   height: 100vh;
+   width: 35%;
+   background-color: var(--panel);
+   border-left: 1px solid var(--border);
+   padding: 32px;
+   width: 280px;
+
+
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+
+.panel-loading {
+   opacity: 0.5;
+   pointer-events: none;
+}
+
+
+.risk-score {
+   font-family: var(--font-heading);
+   font-size: 72px;
+   line-height: 1;
+   color: var(--text);
+}
+
+
+.risk-score-container{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.severity-badge {
+   display: inline-block;
+   padding: 6px 14px;
+   border-radius: 999px;
+   font-size: 14px;
+   font-weight: 600;
+   color: white;
+   background-color: var(--green);
+}
+
+
+.severity-badge.medium {
+   background-color: var(--amber);
+}
+
+
+.severity-badge.high {
+   background-color: var(--red);
+}
+
+
+.severity-badge.low {
+   background-color: var(--green);
+}
+
+
+.badge-high {
+   background-color: var(--red);
+   color: white;
+   padding: 4px 12px;
+   border-radius: 20px;
+   font-size: 12px;
+   font-weight: bold;
+}
+
+
+.badge-moderate {
+   background-color: var(--amber);
+   color: white;
+   padding: 4px 12px;
+   border-radius: 20px;
+   font-size: 12px;
+   font-weight: bold;
+}
+
+
+.badge-low {
+   background-color: var(--green);
+   color: white;
+   padding: 4px 12px;
+   border-radius: 20px;
+   font-size: 12px;
+   font-weight: bold;
+}
+
+
+.confidence-track {
+   width: 100%;
+   height: 10px;
+   background: var(--border);
+   border-radius: 999px;
+   overflow: hidden;
+}
+
+
+.confidence-fill {
+   height: 100%;
+   width: 0%;
+   background: var(--color-accent);
+   border-radius: inherit;
+   transition: width 0.3s ease;
+}
+
+
+.badge-high,
+.badge-moderate,
+.badge-low {
+   padding: 4px 12px;
+   border-radius: 20px;
+   font-size: 12px;
+   font-weight: bold;
+   color: white;
+}
+
+
+.badge-high {
+   background: var(--red);
+}
+
+
+.badge-moderate {
+   background: var(--amber);
+}
+
+
+.badge-low {
+   background: var(--green);
+}
+
+
+.map-leged {
+   position: absolute;
+   bottom: 16px;
+   left: 16px;
+
+
+   background: var(--panel);
+   padding: 12px;
+   border-radius: 8px;
+   border: 1px solid var(--border);
+
+
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+
+
+   font-size: 12px;
+}
+
