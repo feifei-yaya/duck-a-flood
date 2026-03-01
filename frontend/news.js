@@ -1,35 +1,57 @@
-const apiKey = 'YOUR_NEWSAPI_KEY_HERE'; // replace with your key
+const axios = require('axios');
 
+// Function to fetch flood news
 async function fetchFloodNews() {
     try {
-        const url = `https://newsapi.org/v2/everything?q=flood&sortBy=publishedAt&language=en&pageSize=10&apiKey=${apiKey}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return data.articles || [];
-    } catch (err) {
-        console.error('Failed to fetch news', err);
-        return [];
+        // Using NewsAPI (free tier available at newsapi.org)
+        const apiKey = '6cf87caeaa834e3c935c7e82c35fc3b1'; // Get free key from newsapi.org
+        const url = `https://newsapi.org/v2/everything?q=flood&sortBy=publishedAt&language=en&apiKey=${apiKey}`;
+
+        const response = await axios.get(url);
+        
+        
+        console.log('Recent Flood News:');
+        articles.forEach((article, index) => {
+            console.log(`\n${index + 1}. ${article.title}`);
+            console.log(`Source: ${article.source.name}`);
+            console.log(`Time: ${article.publishedAt}`);
+            console.log(`URL: ${article.url}`);
+        });
+
+        return articles;
+    } catch (error) {
+        console.error('Failed to fetch flood news, retrying in 5 mins:', error.message);
+        setTimeout(fetchFloodNews, 300000); // Retry in 5 minutes (300000 ms)
     }
 }
 
-async function updateNewsFeed() {
-    const articles = await fetchFloodNews();
-    const track = document.querySelector('#news-feed .news-track');
-    track.innerHTML = '';
+// Schedule to run every hour (3600000 ms)
+setInterval(fetchFloodNews, 60);
+setInterval(updateNews, 60);
+// Run immediately on start
+fetchFloodNews();
 
-    articles.forEach(article => {
-        const div = document.createElement('div');
-        div.className = 'news-article';
-        div.innerHTML = `
-            <a href="${article.url}" target="_blank">${article.title}</a>
-            <small>${article.source.name} | ${new Date(article.publishedAt).toLocaleTimeString()}</small>
-        `;
-        track.appendChild(div);
-    });
+module.exports = { fetchFloodNews };
+
+let latestNews = [];
+
+async function updateNews() {
+    latestNews = await fetchFloodNews();
+    latestNews = latestNews.slice(0,10);
+    
 }
-
-// Initial load
-updateNewsFeed();
-
-// Refresh every 60 seconds
-setInterval(updateNewsFeed, 60*1000);
+const express = require('express');
+const app = express();
+app.get('/news', (req, res) => {
+    res.json(latestNews);
+});
+app.listen(3000, () => {
+    console.log('News server running on port 3000');
+});
+app.get('/news', (req, res) => {
+if (latestNews.length === 0) {
+    return res.status(503).json({ error: 'News not available yet, please try again later.' });
+}
+  console.log('Serving news, count:', latestNews.length); // add this
+  res.json(latestNews);
+});
