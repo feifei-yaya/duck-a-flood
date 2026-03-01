@@ -23,7 +23,27 @@
   </div>
 </nav>
         
+    <div class="content">
+        <h1>Welcome to Duck, A Flood!</h1>
+        <p>Your one-stop resource for flood information and safety tips.</p>
+        <p>Use the navigation above to explore the flood map and emergency contacts.</p>
     </div>
+
+<div> 
+    <h1>Latest Flood News</h1>
+    <div id="news-container">
+        
+      <p class="textfont">Below our latest articles on updates of floods and emergency situations.</p>
+
+    <script> 
+        async function loadNews(){
+            const res = await fetch('/api/news');
+            const articles = await res.json();
+            console.log(articles);
+        }
+        loadNews();
+    </script>
+</div>
 
 </body>
 
