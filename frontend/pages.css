@@ -1,37 +1,41 @@
 html
-.body{
-    display:flex;
-}
-.body{
+
+body{
     height:100%;
     margin:0;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
-    color: black;
+    color: #111827;
 }
-.text{
+.menu {
+  background-color : #101935ff;
+  overflow: hidden;
+  padding: 10px;
+}
+ .menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ }
+ .menu ul li {
+  float: left;
+  }
+  .menu ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 14px 16px;
+    border-radius: 7px;
+    margin: 0 10px;
+  }
+  .menu ul li a:hover {
+    background-color: rgb(12, 1, 31);
+  }
+.header{
     margin:auto;
-    font-size:24px;
+    font-size:4em;
     font-weight:bold;
-    font-family: Arial,sans-serif;
-}
-ul li {
-	float: left;
-}
-
-ul li a.menu {
-	color: white;
-	text-decoration: none;
-	padding: 14px 16px;
-	display: block;
-	border-radius: 7px;   
-	border-width: 5px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-ul li a:hover {
-	background-color: rgb(12, 1, 31); 
+    font-family: Arial, sans-serif;
 }
 
 .textfont {
@@ -41,23 +45,48 @@ ul li a:hover {
   font-style: normal;
   font-size: 1.2em; 
 }
-
-
 .navbar {
-  overflow: hidden;
-  background-color: #101935ff; 
-  margin: 0px
+  width: 100%;
+  background-color: #101935;
+  padding: 16px 0;
 }
 
-.navbar a {
-  float: left;
-  font-size: 21px;
-  color:#101935ff ;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-   
+.nav-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: rgb(12, 1, 31);;
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-links li a:hover {
+  opacity: 0.7;
+}
+
+.nav-links li a.active {
+  border-bottom: 2px solid #2980b9;
 }
