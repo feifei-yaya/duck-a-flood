@@ -1,57 +1,55 @@
-document.addEventListener("DOMContentLoaded", async function () {
-  // Initialize the map centered on Georgia
-  const map = L.map('map').setView([32.1656, -82.9001], 7);
+document.addEventListener("DOMContentLoaded", function () {
+  // Create the map
+  const map = L.map('map').setView([39.5, -98.35], 4);
 
   // Add OpenStreetMap tiles
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  const cityListDiv = document.getElementById("cityList");
+  // Sample city data
+  const cityData = [
+    {name:"Houston", lat:29.7604, lng:-95.3698, risk:0.82},
+    {name:"New Orleans", lat:29.9511, lng:-90.0715, risk:0.67},
+    {name:"Miami", lat:25.7617, lng:-80.1918, risk:0.41},
+    {name:"Atlanta", lat:33.7490, lng:-84.3880, risk:0.33}
+  ];
 
-  // List of Georgia cities (or whatever cities your backend supports)
-  const cities = ["Atlanta", "Savannah", "Macon", "Augusta"];
+  // Sort by risk descending
+  cityData.sort((a,b) => b.risk - a.risk);
 
-  function getRiskCategory(risk) {
-    if (risk > 0.7) return "high";
-    if (risk > 0.4) return "medium";
+  // Functions for category & color
+  function getRiskCategory(risk){
+    if(risk > 0.7) return "high";
+    if(risk > 0.4) return "medium";
     return "low";
   }
 
-  function getRiskColor(risk) {
-    if (risk > 0.7) return "#ef4444"; // red
-    if (risk > 0.4) return "#f59e0b"; // amber
-    return "#10b981"; // green
+  function getRiskColor(risk){
+    if(risk > 0.7) return "#ef4444";
+    if(risk > 0.4) return "#f59e0b";
+    return "#10b981";
   }
 
-  // Fetch risk data from backend for each city
-  for (const city of cities) {
-    try {
-      const res = await fetch(`http://localhost:8000/score?city=${city}`);
-      const data = await res.json();
+  const cityListDiv = document.getElementById("cityList");
 
-      // Assuming backend returns: { "name": "Atlanta", "lat": 33.7490, "lng": -84.3880, "risk": 0.33 }
-      const { name, lat, lng, risk } = data;
+  cityData.forEach(city => {
+    // Add city to sidebar
+    const category = getRiskCategory(city.risk);
+    const color = getRiskColor(city.risk);
+    const cityDiv = document.createElement("div");
+    cityDiv.className = `city-item ${category}`;
+    cityDiv.innerHTML = `<strong>${city.name}</strong><br>Risk Score: ${city.risk.toFixed(2)}`;
+    cityListDiv.appendChild(cityDiv);
 
-      // Add to sidebar
-      const category = getRiskCategory(risk);
-      const cityDiv = document.createElement("div");
-      cityDiv.className = `city-item ${category}`;
-      cityDiv.innerHTML = `<strong>${name}</strong><br>Risk Score: ${risk.toFixed(2)}`;
-      cityListDiv.appendChild(cityDiv);
-
-      // Add marker to map
-      L.circleMarker([lat, lng], {
-        radius: 10,
-        fillColor: getRiskColor(risk),
-        color: "#ffffff",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-      }).addTo(map).bindPopup(`<strong>${name}</strong><br>Risk Score: ${risk.toFixed(2)}`);
-
-    } catch (err) {
-      console.error(`Error fetching data for ${city}:`, err);
-    }
-  }
+    // Add marker on map
+    L.circleMarker([city.lat, city.lng], {
+      radius: 10,
+      fillColor: color,
+      color: "#ffffff",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    }).addTo(map).bindPopup(`<strong>${city.name}</strong><br>Risk Score: ${city.risk.toFixed(2)}`);
+  });
 });

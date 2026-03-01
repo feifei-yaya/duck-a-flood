@@ -16,14 +16,29 @@
   <title>Duck, A Flood! Map</title>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <h2>Risk Ranking</h2>
-    <div id="cityList"></div>
-  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">Duck, A Flood!</div>
+      <ul class="nav-links">
+        <li><a href="map.html" class="active">Map</a></li>
+        <li><a href="safety.html">Emergency Contact</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <!-- Map -->
-  <div id="map"></div>
+  <!-- Main content wrapper -->
+  <div class="main-content">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <h2>Risk Ranking</h2>
+      <div id="cityList"></div>
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+  </div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
