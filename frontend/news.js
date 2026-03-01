@@ -2,9 +2,10 @@ const axios = require('axios');
 
 // Function to fetch flood news
 async function fetchFloodNews() {
+    const articles = response.data.articles; 
     try {
         // Using NewsAPI (free tier available at newsapi.org)
-        const apiKey = '6cf87caeaa834e3c935c7e82c35fc3b1'; // Get free key from newsapi.org
+        const apiKey = process.env.NEWS_API_KEY; // Get free key from newsapi.org
         const url = `https://newsapi.org/v2/everything?q=flood&sortBy=publishedAt&language=en&apiKey=${apiKey}`;
 
         const response = await axios.get(url);
@@ -26,8 +27,8 @@ async function fetchFloodNews() {
 }
 
 // Schedule to run every hour (3600000 ms)
-setInterval(fetchFloodNews, 60);
-setInterval(updateNews, 60);
+setInterval(fetchFloodNews, 360000);
+setInterval(updateNews, 360000);
 // Run immediately on start
 fetchFloodNews();
 
@@ -43,15 +44,15 @@ async function updateNews() {
 const express = require('express');
 const app = express();
 app.get('/news', (req, res) => {
+    if (latestNews.length === 0) {
+        return res.status(503).json({ error: 'News not available yet, please try again later.' });
+    }
     res.json(latestNews);
 });
 app.listen(3000, () => {
     console.log('News server running on port 3000');
 });
-app.get('/news', (req, res) => {
-if (latestNews.length === 0) {
-    return res.status(503).json({ error: 'News not available yet, please try again later.' });
-}
+
   console.log('Serving news, count:', latestNews.length); // add this
   res.json(latestNews);
 });
