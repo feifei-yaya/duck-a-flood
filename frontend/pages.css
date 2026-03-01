@@ -1,0 +1,63 @@
+html
+.body{
+    display:flex;
+}
+.body{
+    height:100%;
+    margin:0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: black;
+}
+.text{
+    margin:auto;
+    font-size:24px;
+    font-weight:bold;
+    font-family: Arial,sans-serif;
+}
+ul li {
+	float: left;
+}
+
+ul li a.menu {
+	color: white;
+	text-decoration: none;
+	padding: 14px 16px;
+	display: block;
+	border-radius: 7px;   
+	border-width: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+ul li a:hover {
+	background-color: rgb(12, 1, 31); 
+}
+
+.textfont {
+
+  font-family: "Karla", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.2em; 
+}
+
+
+.navbar {
+  overflow: hidden;
+  background-color: #101935ff; 
+  margin: 0px
+}
+
+.navbar a {
+  float: left;
+  font-size: 21px;
+  color:#101935ff ;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+   
+}
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(12, 1, 31);;
+}

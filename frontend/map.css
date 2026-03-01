@@ -5,9 +5,11 @@ html, body{
     background-color: #0f172a;
     color: white;
 }
+
 body{
     display:flex;
 }
+
 #sidebar{
     width:300px;
     padding:20px;
@@ -28,3 +30,4 @@ body{
     flex:1;
     height:100%
 }
+
