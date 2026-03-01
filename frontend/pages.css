@@ -1,37 +1,41 @@
 html
-.body{
-    display:flex;
-}
-.body{
+
+body{
     height:100%;
     margin:0;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
-    color: black;
+    color: #111827;
 }
-.text{
+.menu {
+  background-color : #101935ff;
+  overflow: hidden;
+  padding: 10px;
+}
+ .menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ }
+ .menu ul li {
+  float: left;
+  }
+  .menu ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 14px 16px;
+    border-radius: 7px;
+    margin: 0 10px;
+  }
+  .menu ul li a:hover {
+    background-color: rgb(12, 1, 31);
+  }
+.header{
     margin:auto;
-    font-size:24px;
+    font-size:4em;
     font-weight:bold;
-    font-family: Arial,sans-serif;
-}
-ul li {
-	float: left;
-}
-
-ul li a.menu {
-	color: white;
-	text-decoration: none;
-	padding: 14px 16px;
-	display: block;
-	border-radius: 7px;   
-	border-width: 5px;
-	margin-right: 10px;
-	margin-left: 10px;
-}
-
-ul li a:hover {
-	background-color: rgb(12, 1, 31); 
+    font-family: Arial, sans-serif;
 }
 
 .textfont {
@@ -43,21 +47,3 @@ ul li a:hover {
 }
 
 
-.navbar {
-  overflow: hidden;
-  background-color: #101935ff; 
-  margin: 0px
-}
-
-.navbar a {
-  float: left;
-  font-size: 21px;
-  color:#101935ff ;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-   
-}
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: rgb(12, 1, 31);;
-}
