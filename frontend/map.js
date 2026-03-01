@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const cityListDiv = document.getElementById("cityList");
 
-  // List of Georgia cities (or whatever cities your backend supports)
-  const cities = ["Atlanta", "Savannah", "Macon", "Augusta"];
+  // List of Georgia cities
+  const cities = ['Atlanta', 'Savannah', 'Augusta', 'Columbus', 'St. Simons', 'Macon', 'Albany', 'Athens', 'Roswell'];
 
   function getRiskCategory(risk) {
     if (risk > 0.7) return "high";
