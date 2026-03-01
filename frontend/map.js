@@ -7,24 +7,20 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // City coordinates — dict generated from Claude, Google Maps verified 
   const cityData = [
-    {name:"Houston", lat:29.7604, lng:-95.3698, risk:0.82},
-    {name:"New Orleans", lat:29.9511, lng:-90.0715, risk:0.67},
-    {name:"Miami", lat:25.7617, lng:-80.1918, risk:0.41},
-    {name:"Atlanta", lat:33.7490, lng:-84.3880, risk:0.33}
+    { name: "Atlanta",    lat: 33.7490, lng: -84.3880 },
+    { name: "Savannah",   lat: 32.0835, lng: -81.0998 },
+    { name: "Augusta",    lat: 33.4735, lng: -82.0105 },
+    { name: "Columbus",   lat: 32.4610, lng: -84.9877 },
+    { name: "St. Simons", lat: 31.1355, lng: -81.3926 },
+    { name: "Macon",      lat: 32.8407, lng: -83.6324 },
+    { name: "Albany",     lat: 31.5785, lng: -84.1557 },
+    { name: "Athens",     lat: 33.9519, lng: -83.3576 },
+    { name: "Roswell",    lat: 34.0232, lng: -84.3616 },
   ];
 
-<<<<<<< HEAD
-  // Sort by risk descending
-  cityData.sort((a,b) => b.risk - a.risk);
-=======
-  // List of Georgia cities
-  const cities = ['Atlanta', 'Savannah', 'Augusta', 'Columbus', 'St. Simons', 'Macon', 'Albany', 'Athens', 'Roswell'];
->>>>>>> 79b4b98c5f46400ce5d8630cbc0aef2a4ee8f619
-
-  // Functions for category & color
-  function getRiskCategory(risk){
-    if(risk > 0.7) return "high";
-    if(risk > 0.4) return "medium";
+  function getRiskCategory(risk) {
+    if (risk > 0.65) return "high";
+    if (risk > 0.35) return "medium";
     return "low";
   }
 
